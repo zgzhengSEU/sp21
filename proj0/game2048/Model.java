@@ -179,11 +179,22 @@ public class Model extends Observable {
         // TODO: Fill in this function.
         boolean flag=false;
         for(int i=0;i<b.size();i+=1){
-            for(int j=0;j<b.size();j+=1){
-                if(b.tile(i,j)==null){
+            for(int j=0;j<b.size()-1;j+=1){
+                if(b.tile(i,j)==null||b.tile(i,j+1)==null){
                     continue;
-                }else if(b.tile(i,j).distToNext()!=0){
+                }else if(b.tile(i,j).value()==b.tile(i,j+1).value()){
                     flag=true;
+                    break;
+                }
+            }
+        }
+        for(int i=0;i<b.size()-1;i+=1){
+            for(int j=0;j<b.size();j+=1){
+                if(b.tile(i,j)==null||b.tile(i+1,j)==null){
+                    continue;
+                }else if(b.tile(i,j).value()==b.tile(i+1,j).value()){
+                    flag=true;
+                    break;
                 }
             }
         }
